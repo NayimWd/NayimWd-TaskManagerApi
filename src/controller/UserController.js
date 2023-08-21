@@ -33,17 +33,19 @@ exports.Login = (req, res) => {
 			},
 		])
 		.then((data) => {
-			if (data.data !== 0) {
+			if (data[0].length !== null) {
 				let payload = {
 					exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60,
 					data: data[0]["email"],
 				};
-
+				
 				let token = jwt.sign(payload, "token87s8d");
 
 				res
 					.status(200)
 					.json({ status: "Login Success", token: token, data: data[0] });
+			} else{
+				res.status(401).json({status: "AnAuthorized User(lt)"})
 			}
 		})
 		.catch((err) => {

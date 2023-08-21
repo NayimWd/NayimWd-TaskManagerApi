@@ -9,7 +9,7 @@ const router = express.Router();
 // registration
 router.post("/registration", Registration);
 // login
-router.post("/login", AuthVerifyMiddleware, Login)
+router.post("/login", Login)
 // update Profile
 router.post("/updateProfile", AuthVerifyMiddleware, UpdateProfile)
 
