@@ -2,7 +2,7 @@
 const express = require('express');
 const { Registration, UpdateProfile, Login } = require('../controller/UserController');
 const AuthVerifyMiddleware = require('../middleware/AuthVerifyMiddleware');
-const { CreateTask, ReadTasks, UpdateStatus, SelectTasksByStatus, TaskStatusCount } = require('../controller/TasksController');
+const { CreateTask, ReadTasks, UpdateStatus, SelectTasksByStatus, TaskStatusCount, DeleteTask } = require('../controller/TasksController');
 
 const router = express.Router();
 // Profile Section
@@ -18,9 +18,13 @@ router.post("/updateProfile", AuthVerifyMiddleware, UpdateProfile)
 router.post("/createTask", AuthVerifyMiddleware, CreateTask);
 // Read Tasks
 router.get("/readTasks", ReadTasks);
+// delete task
+router.delete("/deleteTask/:id", AuthVerifyMiddleware, DeleteTask)
 // update Status
 router.get("/updateStatus/:id/:status", AuthVerifyMiddleware, UpdateStatus);
+// task filter by status
 router.get("/SelectTasksByStatus/:status", AuthVerifyMiddleware, SelectTasksByStatus);
+// task summary
 router.get("/taskStatusCount", AuthVerifyMiddleware, TaskStatusCount);
 
 
