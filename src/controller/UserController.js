@@ -83,3 +83,17 @@ exports.UpdateProfile = (req, res) => {
 
 };
 
+exports.getProfileDetails = (req, res) => {
+	let reqEmail = req.headers?.email;
+
+	userModel.aggregate([
+		{$match: {email: reqEmail}},
+		{$project: {_id: 1, email: 1, firstName: 1, lastName: 1, phoneNumber: 1, photo: 1, password: 1 }}
+	])
+	.then((result)=>{
+		res.status(200).json({status: "Profile details found success!", data: result})
+	})
+	.catch((err)=>{
+		res.status(400).json({status: "Profile details not found!", data: err})
+	})
+}

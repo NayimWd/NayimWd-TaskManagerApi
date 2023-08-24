@@ -1,6 +1,6 @@
 // all router setup
 const express = require('express');
-const { Registration, UpdateProfile, Login } = require('../controller/UserController');
+const { Registration, UpdateProfile, Login, getProfileDetails } = require('../controller/UserController');
 const AuthVerifyMiddleware = require('../middleware/AuthVerifyMiddleware');
 const { CreateTask, ReadTasks, UpdateStatus, SelectTasksByStatus, TaskStatusCount, DeleteTask } = require('../controller/TasksController');
 
@@ -12,6 +12,8 @@ router.post("/registration", Registration);
 router.post("/login", Login)
 // update Profile
 router.post("/updateProfile", AuthVerifyMiddleware, UpdateProfile)
+// get profile details
+router.get('/profileDetails', AuthVerifyMiddleware, getProfileDetails)
 
 // Task Section 
 // create Task
